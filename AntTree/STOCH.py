@@ -8,11 +8,11 @@ import time
 #パラメータ
 #alpha1 = 0.986 #wine
 #alpha2 = 0.2 #wine
-#alpha1 = 0.9 #corners
+#alpha1 = 0.92 #corners
 #alpha2 = 0.1 #corners
 #alpha1 = 0.96 #iris
 #alpha2 = 0.28 #iris
-alpha1 = 0.99
+alpha1 = 0.92
 alpha2 = 0.1
 Lmax = 20 #1匹のアリの接続限界数
 
@@ -60,7 +60,6 @@ def build_organize(a_pos, ai, ant):
             else :
                 if Sim(ai, ant[ai.a_plus]) < ai.Tdsim : 
                     if len(a_pos.children) >= Lmax : #Lmaxに達しているとき
-                        #ai.Tsim = ai.Tsim * alpha1
                         ai.dec_Tsim(alpha1)
                         #aiをa_plusに移動
                         ai.set_pos(ai.a_plus)
@@ -72,11 +71,9 @@ def build_organize(a_pos, ai, ant):
                 else :
                     #現在の位置を保つ a_pos = a0まま
                     ai.set_pos(0)
-                    #ai.Tsim = ai.Tsim * alpha1
                     ai.dec_Tsim(alpha1)
                     ai.inc_Tdsim(alpha2)
-                    #ai.Tdsim = ai.Tdsim + alpha2
-                        
+                                            
     else :  #a_posがその他のアリのとき
         tmp = [a_pos.parent[0]]
         for i in range(len(a_pos.children)):
@@ -102,16 +99,12 @@ def build_organize(a_pos, ai, ant):
             else :
                 ai.dec_Tsim(alpha1)
                 ai.inc_Tdsim(alpha2)
-                #ai.Tsim = ai.Tsim * alpha1
-                #ai.Tdsim = ai.Tdsim + alpha2
                 #a_kに移動
                 ai.set_pos(a_k.Id)
                 
         else:
             ai.dec_Tsim(alpha1)
             ai.inc_Tdsim(alpha2)
-            #ai.Tsim = ai.Tsim * alpha1
-            #ai.Tdsim = ai.Tdsim + alpha2
             #a_kに移動
             ai.set_pos(a_k.Id)
             

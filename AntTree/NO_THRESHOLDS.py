@@ -35,7 +35,7 @@ def ant_remove(index, ant):
         p = ant[index].parent[0]
         ant[p].rm_children(index)
         ant[index].disconect()
-        ant[index].first = True #！！要検討！！　サポートに戻ったとき初回に戻すかどうか
+        #ant[index].first = True #！！要検討！！　サポートに戻ったとき初回に戻すかどうか
     #子を持つ場合，再帰呼び出し
     else :
         for i in ant[index].children :
@@ -100,7 +100,7 @@ def main(fname):
     #データの読み込み
     O_data = pd.read_csv(fname)
     V_data = O_data.values
-    np.random.shuffle(V_data)
+    np.random.shuffle(V_data) #ランダムに並び替え
     T_data = V_data.tolist()
     #データを0~1に標準化
     vmin = float(V_data.min())
