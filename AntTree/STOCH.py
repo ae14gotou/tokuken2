@@ -12,8 +12,8 @@ import time
 #alpha2 = 0.1 #corners
 #alpha1 = 0.96 #iris
 #alpha2 = 0.28 #iris
-alpha1 = 0.92
-alpha2 = 0.1
+alpha1 = 0.91 #10d_data
+alpha2 = 0.1 #10d_data
 Lmax = 20 #1匹のアリの接続限界数
 
 
@@ -33,7 +33,7 @@ def Sim(Oi, Oj): #オブジェクト間の類似度(0～1)
     if ans > 1.0 :
         #print ans, Oi.data, Oj.data
         ans = 1.0
-
+    #ansが0に近い=>オブジェクト間の距離が近い=>似ている
     return 1.0 - ans
 
 def build_organize(a_pos, ai, ant):

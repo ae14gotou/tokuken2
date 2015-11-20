@@ -7,7 +7,10 @@ import time
 
 N = 20 #繰り返し回数
 #データ読み込み
-fname = "corners_value.csv"
+#fname = "corners_value.csv"
+#k = 4 #k-means用のクラスタ数
+#d = [50,100,150,200] #正解クラスの区切り
+fname = "10d_randomData_value.csv"
 k = 4 #k-means用のクラスタ数
 d = [50,100,150,200] #正解クラスの区切り
 #fname = "iris_value.csv"
