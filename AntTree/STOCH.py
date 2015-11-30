@@ -12,7 +12,7 @@ import time
 #alpha2 = 0.1 #corners
 #alpha1 = 0.96 #iris
 #alpha2 = 0.28 #iris
-alpha1 = 0.91 #10d_data
+alpha1 = 0.92 #10d_data
 alpha2 = 0.1 #10d_data
 Lmax = 20 #1匹のアリの接続限界数
 
@@ -112,14 +112,14 @@ def build_organize(a_pos, ai, ant):
 
 #if __name__ == '__main__':
 def main(fname):
-    #fname = 'glass_value.csv'
+    #fname = '10d_randomData_value.csv'
     data = []
     ant = []
     #データの読み込み
     O_data = pd.read_csv(fname)
 
     V_data = O_data.values
-    np.random.shuffle(V_data)
+    np.random.shuffle(V_data) #データをランダムに並び替える
     
     T_data = V_data.tolist()
     #データを0~1に標準化
