@@ -7,22 +7,22 @@ import time
 
 N = 20 #繰り返し回数
 #データ読み込み
-#fname = "corners_value.csv"
+#fname = "csvfiles/corners_value.csv"
 #k = 4 #k-means用のクラスタ数
 #d = [50,100,150,200] #正解クラスの区切り
-fname = "10d_randomData_value.csv"
+fname = "csvfiles/10d_randomData_value.csv"
 k = 4 #k-means用のクラスタ数
 d = [50,100,150,200] #正解クラスの区切り
-#fname = "iris_value.csv"
+#fname = "csvfiles/iris_value.csv"
 #k = 3 #k-means用のクラスタ数
 #d = [50,100,150] #正解クラスの区切り
-#fname = "glass_value.csv"
+#fname = "csvfiles/glass_value.csv"
 #k = 6 #k-means用のクラスタ数
 #d = [70,146,163,176,186,214] #正解クラスの区切り
-#fname = "wine_value.csv"
+#fname = "csvfiles/wine_value.csv"
 #k = 3 #k-means用のクラスタ数
 #d = [59,130,178] #正解クラスの区切り
-#fname = "wbc_value.csv"
+#fname = "csvfiles/wbc_value.csv"
 #k = 2 #k-means用のクラスタ数
 #d = [458,699] #正解クラスの区切り
 

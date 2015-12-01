@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 #確率的アルゴリズム:AntTree_STOCH
 class Ant():
-    def __init__(self, data, Id, pos):
+    def __init__(self, data, Id, pos, code=0):
         self.data = data
         self.a_plus = 0
         self.a_pos = pos
@@ -12,6 +12,7 @@ class Ant():
         self.Id = Id
         self.conect = False
         self.label = -1
+        self.code = code
 
     def set_parent(self, P):
         self.parent.append(P)
