@@ -6,14 +6,8 @@ import scipy.spatial.distance as dis
 import time
 
 #パラメータ
-#alpha1 = 0.986 #wine
-#alpha2 = 0.2 #wine
-#alpha1 = 0.92 #corners
-#alpha2 = 0.1 #corners
-#alpha1 = 0.96 #iris
-#alpha2 = 0.28 #iris
-alpha1 = 0.92 #10d_data
-alpha2 = 0.1 #10d_data
+alpha1 = 0.90 
+alpha2 = 0.38
 Lmax = 20 #1匹のアリの接続限界数
 
 
@@ -110,8 +104,8 @@ def build_organize(a_pos, ai, ant):
             
     return 0
 
-if __name__ == '__main__':
-#def main(fname):
+#if __name__ == '__main__':
+def main():
     #fname = '10d_randomData_value.csv'
     data = []
     ant = []
@@ -134,7 +128,7 @@ if __name__ == '__main__':
     X = []
 
     #ant.append(Ant.Ant([],0,0)) #root 根　サポート役
-    for i in range(len(T_data)):  #アリ（データ）の初期化
+    for i in range(len(T_code_data)):  #アリ（データ）の初期化
         ant.append(Ant.Ant(data[i], i, 0, int(T_code_data[i][0])))#変更点
         X.append(T_data[i]) #cluster_Ant用
     #木の構築
@@ -159,9 +153,9 @@ if __name__ == '__main__':
     #---------------------------------------------------
     X = np.array(X)
 
-    #return ant, X, count1-1
-    print "Id  code  parent  children  a_plus  conect  Tsim  Tdsin  Pos"
-    for ai in ant :
-        print ai.Id, ai.code, ai.parent, ai.children, ai.a_plus, ai.conect, ai.Tsim, ai.Tdsim, ai.a_pos
-    print "count1:",count1 ,"count2:",count2
+    return ant, X, count1-1
+    #print "Id  code  parent  children  a_plus  conect  Tsim  Tdsin  Pos"
+    #for ai in ant :
+    #    print ai.Id, ai.code, ai.parent, ai.children, ai.a_plus, ai.conect, ai.Tsim, ai.Tdsim, ai.a_pos
+    #print "count1:",count1 ,"count2:",count2
     

@@ -31,22 +31,29 @@ def get_returnindex(code):
     ret_index[0] = 1
     print '='*30
     print str(code) + ' return index : '+str(start_date)+' -- '+str(end_date)
-    print ret_index
+    print ret_index.index
 
-    return ret_index.values.tolist()
+    return ret_index.values.tolist(), ret_index.index
 
 def make_returnindex_files():
     T1 = []
     T2 = []
+    D = {}
+    t = []
     code = companies.keys()
     for i in code:
-        T1.append(get_returnindex(i))
+        s,t = get_returnindex(i)
+        T1.append(s)
         T2.append(i)
+        D[i] = s
 
     T1 = pd.DataFrame(T1)
-    T1.to_csv('return_index_values.csv', index=False, header=False)
+    T1.to_csv('return_index_values.csv', index=False, header=True)
     T2 = pd.DataFrame(T2)
-    T2.to_csv('return_index_codes.csv', index=False, header=False)
+    T2.to_csv('return_index_codes.csv', index=False, header=True)
+    D = pd.DataFrame(D,index=t)
+    print D
+    D.to_csv('return_index_all.csv')
     
 if __name__ == '__main__' :
     make_returnindex_files()

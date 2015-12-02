@@ -4,6 +4,11 @@ import datetime
 import pandas as pd
 from pandas import Series, DataFrame
 import matplotlib.pyplot as plt
+#自作モジュールのインポート
+import STOCH_StockPrice as st_sp
+import NO_THRESHOLDS_StockPrice as nt_sp
+import K_means_StockPrice as kmeans
+import cluster_Ant as cl_ant
 
 start_date = datetime.date(2015,2,23)
 end_date = datetime.date(2015,4,3)
@@ -13,34 +18,103 @@ companies = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日�
              9719:'SCSK', 4793:'富士通ビー・エス・シー', 4812:'電通国際情報サービス', 8056:'日本ユニシス'}
             #↑printでの表示は工夫が必要... とりあえず使いたいのはkeyだけ
 
+print 'term : '+str(start_date)+' -- '+str(end_date)
+t = pd.read_csv('csvfiles/return_index_all.csv')
+t = t.set_index('date', drop=True)
+#print t
+#print t.index
+dates = t.index
+#print dates
 
-def get_returnindex(code):
-    #csvファイルの読み込み(DataFrame型)
-    df = pd.read_csv("csvfiles/"+ code +"_test.csv", index_col=0,
-                 names=['open','high','low','close','volume','_adj_close'],
-                 parse_dates=True)
-    #print df
+#--- STOCH_StockPrice ---
+Ant, X, count = st_sp.main()
+label = cl_ant.ant_label(Ant)
 
-    dates = pd.date_range(start_date, end_date)
-    price = df['_adj_close']
-    price = price.reindex(dates).dropna()
-    #タイムスタンプでソート的な dropna()->NaN(Not a Number)を除外
-    #調整後終値からリターンインデックスを求める
-    returns = price.pct_change()
-    ret_index = (1 + returns).cumprod()
-    ret_index[0] = 1
-    print '='*30
-    print fname + ' return index : '+str(start_date)+' -- '+str(end_date)
-    print ret_index
+tmp = []
+label_max = max(label)
+for i in range(label_max+1):
+    tmp.append({})
 
-    return ret_index.values.tolist()
+D = {}
+c = 0
+codes = companies.keys()
+for i in label:
+    if i == 0:
+        tmp[i][codes[c]] = X[c]
+    elif i == 1:
+        tmp[i][codes[c]] = X[c]
+    elif i == 2:
+        tmp[i][codes[c]] = X[c]
+    elif i == 3:
+        tmp[i][codes[c]] = X[c]
+    else : pass
+    c = c+1
 
-def make_returnindex_file():
-    T = []
-    code = companies.keys()
-    for i in code:
-        T.append(get_returnindex(i))
+print label
+for i in range(label_max+1):
+    df = pd.DataFrame(tmp[i],index=dates)
+    print df
+    df.plot()
+    plt.show()
 
-    T = pd.DataFrame(T)
-    T.to_csv('return_index_values.csv', index=False, header=False)
-    return code 
+#--- NO_THRESHOLDS_StockPrice ---
+Ant, X, count = nt_sp.main()
+label = cl_ant.ant_label(Ant)
+
+tmp = []
+label_max = max(label)
+for i in range(label_max+1):
+    tmp.append({})
+
+D = {}
+c = 0
+codes = companies.keys()
+for i in label:
+    if i == 0:
+        tmp[i][codes[c]] = X[c]
+    elif i == 1:
+        tmp[i][codes[c]] = X[c]
+    elif i == 2:
+        tmp[i][codes[c]] = X[c]
+    elif i == 3:
+        tmp[i][codes[c]] = X[c]
+    else : pass
+    c = c+1
+
+print label
+for i in range(label_max+1):
+    df = pd.DataFrame(tmp[i],index=dates)
+    print df
+    df.plot()
+    plt.show()
+
+#--- K-means ---
+k = 4 #クラスタ数
+label, X = kmeans.main('csvfiles/return_index_values.csv',k)
+
+tmp = []
+label_max = max(label)
+for i in range(label_max+1):
+    tmp.append({})
+
+D = {}
+c = 0
+codes = companies.keys()
+for i in label:
+    if i == 0:
+        tmp[i][codes[c]] = X[c]
+    elif i == 1:
+        tmp[i][codes[c]] = X[c]
+    elif i == 2:
+        tmp[i][codes[c]] = X[c]
+    elif i == 3:
+        tmp[i][codes[c]] = X[c]
+    else : pass
+    c = c+1
+
+print label
+for i in range(label_max+1):
+    df = pd.DataFrame(tmp[i],index=dates)
+    print df
+    df.plot()
+    plt.show()
