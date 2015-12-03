@@ -98,8 +98,8 @@ def main():
     ant = []
 
     #データの読み込み
-    O_data = pd.read_csv('csvfiles/return_index_values.csv')
-    code_data = pd.read_csv('csvfiles/return_index_codes.csv')
+    O_data = pd.read_csv('return_index_values.csv')
+    code_data = pd.read_csv('return_index_codes.csv')
     
     V_data = O_data.values
     V_code_data = code_data.values

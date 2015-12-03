@@ -10,8 +10,8 @@ import NO_THRESHOLDS_StockPrice as nt_sp
 import K_means_StockPrice as kmeans
 import cluster_Ant as cl_ant
 
-start_date = datetime.date(2015,2,23)
-end_date = datetime.date(2015,4,3)
+start_date = datetime.date(2015,4,1)
+end_date = datetime.date(2015,6,30)
 companies = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日鉄住金ソリューションズ',
              9640:'セゾン情報システムズ', 3626:'ITホールディングス', 2317:'システナ',
              4684:'オービック', 9739:'NSW', 4726:'ソフトバンク・テクノロジー', 4307:'野村総合研究所',
@@ -19,7 +19,7 @@ companies = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日�
             #↑printでの表示は工夫が必要... とりあえず使いたいのはkeyだけ
 
 print 'term : '+str(start_date)+' -- '+str(end_date)
-t = pd.read_csv('csvfiles/return_index_all.csv')
+t = pd.read_csv('return_index_all.csv')
 t = t.set_index('date', drop=True)
 #print t
 #print t.index
@@ -46,6 +46,12 @@ for i in label:
     elif i == 2:
         tmp[i][codes[c]] = X[c]
     elif i == 3:
+        tmp[i][codes[c]] = X[c]
+    elif i == 4:
+        tmp[i][codes[c]] = X[c]
+    elif i == 5:
+        tmp[i][codes[c]] = X[c]
+    elif i == 6:
         tmp[i][codes[c]] = X[c]
     else : pass
     c = c+1
@@ -90,7 +96,7 @@ for i in range(label_max+1):
 
 #--- K-means ---
 k = 4 #クラスタ数
-label, X = kmeans.main('csvfiles/return_index_values.csv',k)
+label, X = kmeans.main('return_index_values.csv',k)
 
 tmp = []
 label_max = max(label)

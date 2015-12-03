@@ -10,8 +10,8 @@ q = jsm.QuotesCsv()
 #クラスに保存の場合
 #q= jsm.Quotes()
 
-start_date = datetime.date(2015,2,23)
-end_date = datetime.date(2015,4,3)
+start_date = datetime.date(2015,4,1)
+end_date = datetime.date(2015,11,30)
 
 #株価を取得しcsvに保存
 #q.save_historical_prices("NTTData_April.csv", 9613, jsm.DAILY, start_date, end_date)
@@ -24,7 +24,7 @@ from pandas import Series, DataFrame
 import matplotlib.pyplot as plt
 
 fname = "9682"
-df = pd.read_csv("csvfiles/"+ fname +"_test.csv", index_col=0,
+df = pd.read_csv("csvfiles/"+ fname +"_data.csv", index_col=0,
                  names=['open','high','low','close','volume','_adj_close'],
                  parse_dates=True)
 print df

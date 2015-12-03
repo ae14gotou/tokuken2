@@ -6,8 +6,8 @@ import scipy.spatial.distance as dis
 import time
 
 #パラメータ
-alpha1 = 0.90 
-alpha2 = 0.38
+alpha1 = 0.99
+alpha2 = 0.1
 Lmax = 20 #1匹のアリの接続限界数
 
 
@@ -110,8 +110,8 @@ def main():
     data = []
     ant = []
     #データの読み込み
-    O_data = pd.read_csv('csvfiles/return_index_values.csv')
-    code_data = pd.read_csv('csvfiles/return_index_codes.csv')
+    O_data = pd.read_csv('return_index_values.csv')
+    code_data = pd.read_csv('return_index_codes.csv')
 
     V_data = O_data.values
     V_code_data = code_data.values

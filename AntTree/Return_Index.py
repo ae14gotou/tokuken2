@@ -5,8 +5,8 @@ import pandas as pd
 from pandas import Series, DataFrame
 import matplotlib.pyplot as plt
 
-start_date = datetime.date(2015,2,23)
-end_date = datetime.date(2015,4,3)
+start_date = datetime.date(2015,4,1)
+end_date = datetime.date(2015,6,30)
 companies = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日鉄住金ソリューションズ',
              9640:'セゾン情報システムズ', 3626:'ITホールディングス', 2317:'システナ',
              4684:'オービック', 9739:'NSW', 4726:'ソフトバンク・テクノロジー', 4307:'野村総合研究所',
@@ -16,7 +16,9 @@ companies = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日�
 
 def get_returnindex(code):
     #csvファイルの読み込み(DataFrame型)
-    df = pd.read_csv("csvfiles/"+ str(code) +"_test.csv", index_col=0,
+    #test(2015,2,23 -- 2015,4,3) ->30次元 data(2015,4,1 -- 2015,11,30) ->163次元
+    #df = pd.read_csv("csvfiles/"+ str(code) +"_test.csv", index_col=0,
+    df = pd.read_csv("csvfiles/"+ str(code) +"_data.csv", index_col=0,
                  names=['open','high','low','close','volume','_adj_close'],
                  parse_dates=True)
     #print df
@@ -51,6 +53,8 @@ def make_returnindex_files():
     T1.to_csv('return_index_values.csv', index=False, header=True)
     T2 = pd.DataFrame(T2)
     T2.to_csv('return_index_codes.csv', index=False, header=True)
+    
+    print t, len(t)
     D = pd.DataFrame(D,index=t)
     print D
     D.to_csv('return_index_all.csv')
