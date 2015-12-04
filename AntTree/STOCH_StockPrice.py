@@ -106,7 +106,6 @@ def build_organize(a_pos, ai, ant):
 
 #if __name__ == '__main__':
 def main():
-    #fname = '10d_randomData_value.csv'
     data = []
     ant = []
     #データの読み込み
@@ -143,7 +142,7 @@ def main():
             else : count2 = count2 + 1
         count1 = count1 + 1
 
-    #----サポートの子の中で一番類似するデータ----
+    #----サポートの子の中で一番類似するデータ---------------
     #tmp = alpha1
     tmp = 0.0
     for i in ant[0].children :
