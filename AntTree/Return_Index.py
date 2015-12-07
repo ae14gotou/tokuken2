@@ -4,8 +4,8 @@ import datetime
 import pandas as pd
 from pandas import Series, DataFrame
 
-s_date = datetime.date(2015,4,1)
-e_date = datetime.date(2015,6,30)
+#s_date = datetime.date(2015,4,1)
+#e_date = datetime.date(2015,6,30)
 companies = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日鉄住金ソリューションズ',
              9640:'セゾン情報システムズ', 3626:'ITホールディングス', 2317:'システナ',
              4684:'オービック', 9739:'NSW', 4726:'ソフトバンク・テクノロジー', 4307:'野村総合研究所',

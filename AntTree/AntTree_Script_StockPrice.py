@@ -1,6 +1,6 @@
 ﻿
 #---------------------------------------------------------------------
-#AntTreeアルゴリズムを用いたクラスタリングシステム
+#AntTreeアルゴリズムを用いた(株価データ)クラスタリングシステム
 #--STOCH -> 確率論的アルゴリズム
 #--NO_THRESHOLDS -> 決定論的アルゴリズム
 #--K-means法は比較用に作成
@@ -8,6 +8,7 @@
 #---------------------------------------------------------------------
 
 # -*- coding:utf-8 -*-
+
 import datetime
 import pandas as pd
 from pandas import Series, DataFrame
@@ -20,7 +21,7 @@ import cluster_Ant as cl_ant
 import Return_Index as r_index
 #date 4/1～11/30まで
 start_date = datetime.date(2015,4,1)
-end_date = datetime.date(2015,9,1)
+end_date = datetime.date(2015,5,1)
 companies = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日鉄住金ソリューションズ',
              9640:'セゾン情報システムズ', 3626:'ITホールディングス', 2317:'システナ',
              4684:'オービック', 9739:'NSW', 4726:'ソフトバンク・テクノロジー', 4307:'野村総合研究所',
@@ -28,18 +29,21 @@ companies = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日�
             #↑printでの表示は工夫が必要... とりあえず使いたいのはkeyだけ
 
 print 'term : '+str(start_date)+' -- '+str(end_date)
+#start_dateからend_dateまでの期間のリターンインデックスを計算，csvファイルで保存
+#戻り値は営業日のdatetimeオブジェクト
 dates = r_index.main(start_date, end_date)
+print 'dates : ', len(dates)
 
 #--- STOCH_StockPrice ---
-Ant, X, count = st_sp.main()
+Ant, X, count = st_sp.main(0.95, 0.1) #引数1:alpha1, 引数2:alpha2
 label = cl_ant.ant_label(Ant)
 
 tmp = []
-label_max = max(label)
+label_max = max(label) #クラスタ数
 for i in range(label_max+1):
     tmp.append({})
 
-c = 0
+c = 0 #counter
 codes = companies.keys()
 #グラフ描画の準備
 for i in label:
@@ -49,9 +53,12 @@ for i in label:
         else : pass
     c = c+1
 
-print label
+print ""
+print "STOCH : ",label
+#クラスタごとにグラフを表示
 for i in range(label_max+1):
     df = pd.DataFrame(tmp[i], index=dates)
+    print ""
     print df
     df.plot() #グラフ描画
     plt.title('STOCH: Cluster'+str(i))
@@ -62,11 +69,11 @@ Ant, X, count = nt_sp.main()
 label = cl_ant.ant_label(Ant)
 
 tmp = []
-label_max = max(label)
+label_max = max(label) #クラスタ数
 for i in range(label_max+1):
     tmp.append({})
 
-c = 0
+c = 0 #counter
 codes = companies.keys()
 #グラフ描画の準備
 for i in label:
@@ -76,9 +83,12 @@ for i in label:
         else : pass
     c = c+1
 
-print label
+print ""
+print "NO_THRESHOLDS: ",label
+#クラスタごとにグラフを表示
 for i in range(label_max+1):
     df = pd.DataFrame(tmp[i], index=dates)
+    print ""
     print df
     df.plot() #グラフ描画
     plt.title('NO_THRESHOLDS: Cluster'+str(i))
@@ -103,9 +113,12 @@ for i in label:
         else : pass
     c = c+1
 
-print label
+print ""
+print "K-means: ",label
+#クラスタごとにグラフを表示
 for i in range(label_max+1):
     df = pd.DataFrame(tmp[i], index=dates)
+    print ""
     print df
     df.plot() #グラフ描画
     plt.title('K-means: Cluster'+str(i))

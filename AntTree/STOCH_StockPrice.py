@@ -5,7 +5,7 @@ import numpy as np
 import scipy.spatial.distance as dis
 import time
 
-#パラメータ
+#パラメータ 
 alpha1 = 0.99
 alpha2 = 0.1
 Lmax = 20 #1匹のアリの接続限界数
@@ -105,7 +105,9 @@ def build_organize(a_pos, ai, ant):
     return 0
 
 #if __name__ == '__main__':
-def main():
+def main(a1, a2):
+    alpha1 = a1
+    alpha2 = a2
     data = []
     ant = []
     #データの読み込み
