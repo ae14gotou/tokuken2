@@ -3,8 +3,11 @@
 #AntTreeアルゴリズムを用いた(株価データ)クラスタリングシステム
 #--STOCH -> 確率論的アルゴリズム
 #--NO_THRESHOLDS -> 決定論的アルゴリズム
+#---- Memo -----------------------------------------------------------
 #--K-means法は比較用に作成
 #--株価はyahoo! financeから2015年4/1～11/30までの営業日で取得
+#--12/8追記 4/1～9/15(100次元)でメモリエラー発生 -> クラスタリングできていない
+#--4/1～9/1(90次元)はできる
 #---------------------------------------------------------------------
 
 # -*- coding:utf-8 -*-
@@ -19,9 +22,10 @@ import NO_THRESHOLDS_StockPrice as nt_sp
 import K_means_StockPrice as kmeans
 import cluster_Ant as cl_ant
 import Return_Index as r_index
+import RSI as rsi
 #date 4/1～11/30まで
 start_date = datetime.date(2015,4,1)
-end_date = datetime.date(2015,5,1)
+end_date = datetime.date(2015,9,1)
 companies = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日鉄住金ソリューションズ',
              9640:'セゾン情報システムズ', 3626:'ITホールディングス', 2317:'システナ',
              4684:'オービック', 9739:'NSW', 4726:'ソフトバンク・テクノロジー', 4307:'野村総合研究所',
@@ -32,10 +36,20 @@ print 'term : '+str(start_date)+' -- '+str(end_date)
 #start_dateからend_dateまでの期間のリターンインデックスを計算，csvファイルで保存
 #戻り値は営業日のdatetimeオブジェクト
 dates = r_index.main(start_date, end_date)
+fname1 = 'return_index_values.csv'
+fname2 = 'return_index_codes.csv'
+
+#start_dateからend_dateまでのRSIを計算，csvファイルで保存
+#戻り値はdatetimeオブジェクト
+#n = 14 #14日間でのRSI
+#dates = rsi.main(start_date, end_date, n)
+#fname1 = 'RSI_values.csv'
+#fname2 = 'RSI_codes.csv'
+
 print 'dates : ', len(dates)
 
 #--- STOCH_StockPrice ---
-Ant, X, count = st_sp.main(0.95, 0.1) #引数1:alpha1, 引数2:alpha2
+Ant, X, count = st_sp.main(0.99, 0.1, fname1, fname2) #引数1:alpha1, 引数2:alpha2
 label = cl_ant.ant_label(Ant)
 
 tmp = []
@@ -65,7 +79,7 @@ for i in range(label_max+1):
     plt.show()
 
 #--- NO_THRESHOLDS_StockPrice ---
-Ant, X, count = nt_sp.main()
+Ant, X, count = nt_sp.main(fname1, fname2)
 label = cl_ant.ant_label(Ant)
 
 tmp = []
@@ -96,7 +110,7 @@ for i in range(label_max+1):
 
 #--- K-means ---
 k = 10 #クラスタ数 
-label, X = kmeans.main('return_index_values.csv',k)
+label, X = kmeans.main(fname1, k)
 
 tmp = []
 label_max = max(label)

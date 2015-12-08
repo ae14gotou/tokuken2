@@ -29,7 +29,7 @@ def get_RSI_first(code, start_date, end_date, price):
     #print A, B
 
     RSI_first = round(A/(A+B)*100, 2)
-    print RSI_first
+    #print RSI_first
 
     return A, B, RSI_first
 
@@ -40,14 +40,15 @@ def get_RSI(code, start_date, end_date,n):
     df = pd.read_csv("csvfiles/"+ str(code) +"_data.csv", index_col=0,
                  names=['open','high','low','close','volume','_adj_close'],
                  parse_dates=True)
-    print df
+    #print df
     dates = pd.date_range(start_date, end_date)
     price = df['_adj_close']
     price = price.reindex(dates).dropna()
     #タイムスタンプでソート的な dropna()->NaN(Not a Number)を除外
-    print price[:n+1]
+    #print price[:n+1]
     r = []
-    A, B, RSI_first = get_RSI_first(code,s,e,price[:n+1])
+    #初回
+    A, B, RSI_first = get_RSI_first(code, start_date, end_date, price[:n+1])
     r.append(RSI_first)
     p = price[n+1]
     
@@ -57,13 +58,13 @@ def get_RSI(code, start_date, end_date,n):
         p_b = round(B*(n-1), 3)
         if diff > 0 : A = round((p_a+diff)/n, 3)
         else : B = round((p_b+(-1)*diff)/n, 3)
-        print A,B
+        #print A,B
         r.append(round(A/(A+B)*100, 2))
         p = i
             
-    print r
-    print price.index
-    return r,price.index
+    #print r
+    #print price.index
+    return r, price.index
     
 def make_RSI_files(start_date, end_date, n):
     T1 = [] #リターンインデックス（値）用
@@ -78,25 +79,25 @@ def make_RSI_files(start_date, end_date, n):
         D[i] = s
 
     T1 = pd.DataFrame(T1)
-    print T1
-    #T1.to_csv('RSI_values.csv', index=False, header=True) #save csv
+    #print T1
+    T1.to_csv('RSI_values.csv', index=False, header=True) #save csv
     T2 = pd.DataFrame(T2)
-    print T2
-    #T2.to_csv('RSI_codes.csv', index=False, header=True) #save csv
-    print t[n+1:], len(t[n+1:])
-    D = pd.DataFrame(D,index=t[n+1:])
-    print D
+    #print T2
+    T2.to_csv('RSI_codes.csv', index=False, header=True) #save csv
+    #print t[n+1:], len(t[n+1:])
+    #D = pd.DataFrame(D,index=t[n+1:])
+    #print D
     #print D.columns
     #D.to_csv('RSI_all.csv') #save csv
 
-    return t    
+    return t[n+1:]    
 
-    
-
-if __name__ == '__main__':
-    s = datetime.date(2015,4,1)
-    e = datetime.date(2015,4,30)
-    t = make_RSI_files(s,e,14)
+#if __name__ == '__main__':
+def main(s, e, n):
+    #s = datetime.date(2015,4,1)
+    #e = datetime.date(2015,4,30)
+    t = make_RSI_files(s,e,n)
+    return t
 
     
     

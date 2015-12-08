@@ -53,10 +53,10 @@ def make_returnindex_files(s_date, e_date):
     T2 = pd.DataFrame(T2)
     T2.to_csv('return_index_codes.csv', index=False, header=True) #save csv
     #print t, len(t)
-    D = pd.DataFrame(D,index=t)
+    #D = pd.DataFrame(D,index=t)
     #print D
     #print D.columns
-    D.to_csv('return_index_all.csv') #save csv
+    #D.to_csv('return_index_all.csv') #save csv
 
     return t
     

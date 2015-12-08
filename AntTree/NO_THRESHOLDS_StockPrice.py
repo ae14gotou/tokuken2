@@ -93,13 +93,13 @@ def build_organize(a_pos, ai, ant):
     return 0
             
 #if __name__ == '__main__':
-def main():
+def main(fname1, fname2):
     data = []
     ant = []
 
     #データの読み込み
-    O_data = pd.read_csv('return_index_values.csv')
-    code_data = pd.read_csv('return_index_codes.csv')
+    O_data = pd.read_csv(fname1)
+    code_data = pd.read_csv(fname2)
     
     V_data = O_data.values
     V_code_data = code_data.values
