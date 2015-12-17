@@ -1,6 +1,7 @@
 ﻿
 #---------------------------------------------------------------------
 #AntTreeアルゴリズムを用いた(株価データ)クラスタリングシステム
+#--移動平均を使用するパターンの実行スクリプト
 #--STOCH -> 確率論的アルゴリズム
 #--NO_THRESHOLDS -> 決定論的アルゴリズム
 #---- Memo -----------------------------------------------------------
@@ -21,8 +22,6 @@ import STOCH_StockPrice as st_sp
 import NO_THRESHOLDS_StockPrice as nt_sp
 import K_means_StockPrice as kmeans
 import cluster_Ant as cl_ant
-import Return_Index as r_index
-import RSI as rsi
 import Move_Average as m_ave
 #date 4/1～11/30まで
 start_date = datetime.date(2015,4,1)
@@ -34,18 +33,12 @@ companies = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日�
             #↑printでの表示は工夫が必要... とりあえず使いたいのはkeyだけ
 
 print 'term : '+str(start_date)+' -- '+str(end_date)
-#start_dateからend_dateまでの期間のリターンインデックスを計算，csvファイルで保存
-#戻り値は営業日のdatetimeオブジェクト
-dates = r_index.main(start_date, end_date)
-fname1 = 'return_index_values.csv'
-fname2 = 'return_index_codes.csv'
-
-#start_dateからend_dateまでのRSIを計算，csvファイルで保存
+#start_dateからend_dateまでの移動平均を計算，csvファイルで保存
 #戻り値はdatetimeオブジェクト
-#n = 14 #14日間でのRSI
-#dates = rsi.main(start_date, end_date, n)
-#fname1 = 'RSI_values.csv'
-#fname2 = 'RSI_codes.csv'
+n = 10 #10日間での移動平均
+dates = m_ave.main(start_date, end_date, n)
+fname1 = 'MoveAve_values.csv'
+fname2 = 'MoveAve_codes.csv'
 
 print 'dates : ', len(dates)
 
@@ -60,25 +53,14 @@ for i in range(label_max+1):
 
 c = 0 #counter
 codes = companies.keys()
-#グラフ描画の準備
-for i in label:
-    for j in range(label_max+1):
-        if j == i:
-            tmp[i][codes[c]] = X[c]
-        else : pass
-    c = c+1
-    
 print ""
 print "STOCH : ",label
-
-#クラスタごとにグラフを表示
-for i in range(label_max+1):
-    df = pd.DataFrame(tmp[i], index=dates)
-    print ""
-    print df
-    df.plot() #グラフ描画
-    plt.title('STOCH: Cluster'+str(i))
-    plt.show()
+#会社コードとラベルの表示
+for i in range(len(label)):
+    print label[i], codes[i]
+#移動平均のグラフを描画
+for i in codes:
+    m_ave.graph_Move_Average(i, start_date, end_date, n)
 
 #--- NO_THRESHOLDS_StockPrice ---
 Ant, X, count = nt_sp.main(fname1, fname2)
