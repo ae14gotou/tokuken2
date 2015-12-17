@@ -25,7 +25,7 @@ import Return_Index as r_index
 import RSI as rsi
 #date 4/1～11/30まで
 start_date = datetime.date(2015,4,1)
-end_date = datetime.date(2015,9,1)
+end_date = datetime.date(2015,6,29)
 companies = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日鉄住金ソリューションズ',
              9640:'セゾン情報システムズ', 3626:'ITホールディングス', 2317:'システナ',
              4684:'オービック', 9739:'NSW', 4726:'ソフトバンク・テクノロジー', 4307:'野村総合研究所',
@@ -49,7 +49,7 @@ fname2 = 'return_index_codes.csv'
 print 'dates : ', len(dates)
 
 #--- STOCH_StockPrice ---
-Ant, X, count = st_sp.main(0.99, 0.1, fname1, fname2) #引数1:alpha1, 引数2:alpha2
+Ant, X, count = st_sp.main(0.97, 0.1, fname1, fname2) #引数1:alpha1, 引数2:alpha2
 label = cl_ant.ant_label(Ant)
 
 tmp = []
@@ -109,7 +109,7 @@ for i in range(label_max+1):
     plt.show()
 
 #--- K-means ---
-k = 10 #クラスタ数 
+k = 7 #クラスタ数 
 label, X = kmeans.main(fname1, k)
 
 tmp = []
