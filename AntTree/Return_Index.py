@@ -6,12 +6,17 @@ from pandas import Series, DataFrame
 
 #s_date = datetime.date(2015,4,1)
 #e_date = datetime.date(2015,6,30)
+'''
 companies = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日鉄住金ソリューションズ',
              9640:'セゾン情報システムズ', 3626:'ITホールディングス', 2317:'システナ',
              4684:'オービック', 9739:'NSW', 4726:'ソフトバンク・テクノロジー', 4307:'野村総合研究所',
-             9719:'SCSK', 4793:'富士通ビー・エス・シー', 4812:'電通国際情報サービス', 8056:'日本ユニシス'}
+             9719:'SCSK', 4793:'富士通ビー・エス・シー', 4812:'電通国際情報サービス', 8056:'日本ユニシス',
+             3765:'ガンホー・オンライン・エンターテイメント', 4689:'ヤフー', 4716:'日本オラクル',
+             4739:'伊藤忠テクノソリューションズ', 4825:'ウェザーニュース', 7844:'マーベラス', 9432:'日本電信電話',
+             9433:'KDDI', 9437:'NTTドコモ', 9697:'カプコン', 9766:'コナミ', 9984:'ソフトバンクグループ',
+             9749:'富士ソフト', 3632:'グリー', 3656:'KLab'}
             #↑printでの表示は工夫が必要(日本語の部分)... とりあえず使いたいのはkeyだけ
-
+'''
 
 def get_returnindex(code, start_date, end_date):
     #csvファイルの読み込み(DataFrame型)
@@ -36,7 +41,7 @@ def get_returnindex(code, start_date, end_date):
 
     return ret_index.values.tolist(), ret_index.index
 
-def make_returnindex_files(s_date, e_date):
+def make_returnindex_files(s_date, e_date, companies):
     T1 = [] #リターンインデックス（値）用
     T2 = [] #銘柄コード用
     D = {} #ディクショナリ型,DataFrame型をつくるため
@@ -61,7 +66,7 @@ def make_returnindex_files(s_date, e_date):
     return t
     
 #if __name__ == '__main__' :
-def main(s_date, e_date):
-    t_index = make_returnindex_files(s_date, e_date)
+def main(s_date, e_date, company_dict):
+    t_index = make_returnindex_files(s_date, e_date, company_dict)
     return t_index
     

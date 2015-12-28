@@ -4,11 +4,6 @@ import datetime
 import pandas as pd
 from pandas import Series,DataFrame
 
-companies = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日鉄住金ソリューションズ',
-             9640:'セゾン情報システムズ', 3626:'ITホールディングス', 2317:'システナ',
-             4684:'オービック', 9739:'NSW', 4726:'ソフトバンク・テクノロジー', 4307:'野村総合研究所',
-             9719:'SCSK', 4793:'富士通ビー・エス・シー', 4812:'電通国際情報サービス', 8056:'日本ユニシス'}
-            #↑printでの表示は工夫が必要(日本語の部分)... とりあえず使いたいのはkeyだけ
 
 def get_RSI_first(code, start_date, end_date, price):
     #最初のRSIをもとめる
@@ -66,7 +61,7 @@ def get_RSI(code, start_date, end_date,n):
     #print price.index
     return r, price.index
     
-def make_RSI_files(start_date, end_date, n):
+def make_RSI_files(start_date, end_date, n, companies):
     T1 = [] #リターンインデックス（値）用
     T2 = [] #銘柄コード用
     D = {} #ディクショナリ型,DataFrame型をつくるため
@@ -93,10 +88,10 @@ def make_RSI_files(start_date, end_date, n):
     return t[n+1:]    
 
 #if __name__ == '__main__':
-def main(s, e, n):
+def main(s, e, n, company_dict):
     #s = datetime.date(2015,4,1)
     #e = datetime.date(2015,4,30)
-    t = make_RSI_files(s,e,n)
+    t = make_RSI_files(s,e,n,company_dict)
     return t
 
     
