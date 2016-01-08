@@ -24,13 +24,14 @@ import cluster_Ant as cl_ant
 import Return_Index as r_index
 import RSI as rsi
 import Move_Average as m_ave
+import Pseudo_F as p_f
 #date 4/1～11/30まで
 #4/1 ~ 5/18 : 30日分
 #4/1 ~ 6/29 : 60日分
 #4/1 ~ 8/11 : 90日分
 #4/1 ~ 9/1  : 105日分
 start_date = datetime.date(2015,4,1)
-end_date = datetime.date(2015,9,1)
+end_date = datetime.date(2015,5,18)
 #企業コードと企業名
 companies_test = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日鉄住金ソリューションズ',
              9640:'セゾン情報システムズ', 3626:'ITホールディングス', 2317:'システナ',
@@ -73,7 +74,7 @@ companies_mix = {9437:'NTTドコモ', 4307:'野村総合研究所', 2327:'新日
 
     #↑printでの表示は工夫が必要... とりあえず使いたいのはkeyだけ
 
-companies = companies_it #クラスタリングする業種
+companies = companies_test #クラスタリングする業種
 #update →　ディクショナリの連結
 #companies.update(companies_food)
 #companies.update(companies_retail)
@@ -126,6 +127,9 @@ for i in range(label_max+1):
     df.plot(figsize=(10,8)) #グラフ描画
     plt.title('STOCH: Cluster'+str(i))
     plt.show()
+
+p_f.squares_inCluster(tmp,1)
+
 
 #--- NO_THRESHOLDS_StockPrice ---
 Ant, X, count = nt_sp.main(fname1, fname2)
