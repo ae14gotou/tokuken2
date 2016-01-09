@@ -74,7 +74,7 @@ companies_mix = {9437:'NTTドコモ', 4307:'野村総合研究所', 2327:'新日
 
     #↑printでの表示は工夫が必要... とりあえず使いたいのはkeyだけ
 
-companies = companies_test #クラスタリングする業種
+companies = companies_it #クラスタリングする業種
 #update →　ディクショナリの連結
 #companies.update(companies_food)
 #companies.update(companies_retail)
@@ -128,8 +128,8 @@ for i in range(label_max+1):
     plt.title('STOCH: Cluster'+str(i))
     plt.show()
 
-p_f.squares_inCluster(tmp,1)
-
+test = p_f.main(tmp, label_max+1)
+print test
 
 #--- NO_THRESHOLDS_StockPrice ---
 Ant, X, count = nt_sp.main(fname1, fname2)
@@ -161,8 +161,11 @@ for i in range(label_max+1):
     plt.title('NO_THRESHOLDS: Cluster'+str(i))
     plt.show()
 
+test = p_f.main(tmp, label_max+1)
+print test
+
 #--- K-means ---
-k = 7 #クラスタ数 
+k = 3 #クラスタ数 
 label, X = kmeans.main(fname1, k)
 
 tmp = []
@@ -190,3 +193,6 @@ for i in range(label_max+1):
     df.plot(figsize=(10,8)) #グラフ描画
     plt.title('K-means: Cluster'+str(i))
     plt.show()
+
+test = p_f.main(tmp, label_max+1)
+print test
