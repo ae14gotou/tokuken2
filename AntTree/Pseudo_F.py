@@ -34,7 +34,8 @@ def squares_All(data, k):
     for i in range(k):
         tmp.update(data[i])
     a = tmp.values()
-    n = len(a)*len(a[0])
+    #n = len(a)*len(a[0])
+    n = len(a)
     #print n 
     center = graph_average(tmp)
     #print 'center: ',center

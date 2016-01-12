@@ -7,7 +7,8 @@
 #--K-means法は比較用に作成
 #--株価はyahoo! financeから2015年4/1～11/30までの営業日で取得
 #--12/8追記 4/1～11/30(163次元)でメモリエラー発生 -> クラスタリングできていない
-#--4/1～9/1(105次元)はできた
+#--1/12 4/1～11/30(163次元)できた！！（家PC）
+#--1/12 クラスタリング結果の評価関数(Pseudo_F.py)追加
 #---------------------------------------------------------------------
 
 # -*- coding:utf-8 -*-
@@ -19,7 +20,7 @@ import matplotlib.pyplot as plt
 #自作モジュールのインポート
 import STOCH_StockPrice as st_sp
 import NO_THRESHOLDS_StockPrice as nt_sp
-import K_means_StockPrice as kmeans
+import K_means_StockPrice as kmeans_sp
 import cluster_Ant as cl_ant
 import Return_Index as r_index
 import RSI as rsi
@@ -29,9 +30,9 @@ import Pseudo_F as p_f
 #4/1 ~ 5/18 : 30日分
 #4/1 ~ 6/29 : 60日分
 #4/1 ~ 8/11 : 90日分
-#4/1 ~ 9/1  : 105日分
+#4/1 ~ 9/27 : 120日分
 start_date = datetime.date(2015,4,1)
-end_date = datetime.date(2015,5,18)
+end_date = datetime.date(2015,9,27)
 #企業コードと企業名
 companies_test = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日鉄住金ソリューションズ',
              9640:'セゾン情報システムズ', 3626:'ITホールディングス', 2317:'システナ',
@@ -128,8 +129,8 @@ for i in range(label_max+1):
     plt.title('STOCH: Cluster'+str(i))
     plt.show()
 
-test = p_f.main(tmp, label_max+1)
-print test
+PseudoF = p_f.main(tmp, label_max+1)
+print 'PseudoF: ',PseudoF
 
 #--- NO_THRESHOLDS_StockPrice ---
 Ant, X, count = nt_sp.main(fname1, fname2)
@@ -161,12 +162,12 @@ for i in range(label_max+1):
     plt.title('NO_THRESHOLDS: Cluster'+str(i))
     plt.show()
 
-test = p_f.main(tmp, label_max+1)
-print test
+PseudoF = p_f.main(tmp, label_max+1)
+print 'PseudoF: ',PseudoF
 
 #--- K-means ---
-k = 3 #クラスタ数 
-label, X = kmeans.main(fname1, k)
+k = 8 #クラスタ数 
+label, X = kmeans_sp.main(fname1, k)
 
 tmp = []
 label_max = max(label)
@@ -194,5 +195,5 @@ for i in range(label_max+1):
     plt.title('K-means: Cluster'+str(i))
     plt.show()
 
-test = p_f.main(tmp, label_max+1)
-print test
+PseudoF = p_f.main(tmp, label_max+1)
+print 'PseudoF: ',PseudoF
