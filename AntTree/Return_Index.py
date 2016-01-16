@@ -45,7 +45,7 @@ def make_returnindex_files(s_date, e_date, companies):
     T1 = [] #リターンインデックス（値）用
     T2 = [] #銘柄コード用
     D = {} #ディクショナリ型,DataFrame型をつくるため
-    t = []
+    t = [] #期間
     code = companies.keys()
     for i in code:
         s,t = get_returnindex(i, s_date, e_date)

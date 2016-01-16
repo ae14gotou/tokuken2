@@ -21,6 +21,7 @@ import matplotlib.pyplot as plt
 import STOCH_StockPrice as st_sp
 import NO_THRESHOLDS_StockPrice as nt_sp
 import K_means_StockPrice as kmeans_sp
+import Hierarchy_clustering as h_c
 import cluster_Ant as cl_ant
 import Return_Index as r_index
 import RSI as rsi
@@ -32,7 +33,7 @@ import Pseudo_F as p_f
 #4/1 ~ 8/11 : 90日分
 #4/1 ~ 9/27 : 120日分
 start_date = datetime.date(2015,4,1)
-end_date = datetime.date(2015,9,27)
+end_date = datetime.date(2015,5,18)
 #企業コードと企業名
 companies_test = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日鉄住金ソリューションズ',
              9640:'セゾン情報システムズ', 3626:'ITホールディングス', 2317:'システナ',
@@ -75,7 +76,7 @@ companies_mix = {9437:'NTTドコモ', 4307:'野村総合研究所', 2327:'新日
 
     #↑printでの表示は工夫が必要... とりあえず使いたいのはkeyだけ
 
-companies = companies_it #クラスタリングする業種
+companies = companies_test #クラスタリングする業種
 #update →　ディクショナリの連結
 #companies.update(companies_food)
 #companies.update(companies_retail)
@@ -197,3 +198,6 @@ for i in range(label_max+1):
 
 PseudoF = p_f.main(tmp, label_max+1)
 print 'PseudoF: ',PseudoF
+
+#--- 階層的クラスタリング---
+h_c.main(fname1, fname2, 'single')
