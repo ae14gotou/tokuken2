@@ -140,10 +140,12 @@ def main(fname1, fname2):
     #---------------------------------------------------
     ant[0].set_parent(0)
     X = np.array(X)
-
-   
+    
+    return ant, X, count1-1
+"""
     print "Id  code  parent  children  a_plus  conect  Tsim  Tdsin  Pos"
     for ai in ant :
         print ai.Id, ai.code, ai.parent, ai.children, ai.a_plus, ai.conect, ai.Tsim, ai.Tdsim, ai.a_pos
     print "count1:",count1 ,"count2:",count2
     return ant, X, count1-1
+"""

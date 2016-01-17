@@ -76,7 +76,7 @@ companies_mix = {9437:'NTTドコモ', 4307:'野村総合研究所', 2327:'新日
 
     #↑printでの表示は工夫が必要... とりあえず使いたいのはkeyだけ
 
-companies = companies_test #クラスタリングする業種
+companies = companies_food #クラスタリングする業種
 #update →　ディクショナリの連結
 #companies.update(companies_food)
 #companies.update(companies_retail)
@@ -124,14 +124,16 @@ print "STOCH : ",label
 #クラスタごとにグラフを表示
 for i in range(label_max+1):
     df = pd.DataFrame(tmp[i], index=dates)
-    print ""
-    print df
+    print "--- Cluster"+str(i)+" ---"
+    print tmp[i].keys()
     df.plot(figsize=(10,8)) #グラフ描画
     plt.title('STOCH: Cluster'+str(i))
     plt.show()
 
+print '----'*5
 PseudoF = p_f.main(tmp, label_max+1)
 print 'PseudoF: ',PseudoF
+print ''
 
 #--- NO_THRESHOLDS_StockPrice ---
 Ant, X, count = nt_sp.main(fname1, fname2)
@@ -157,14 +159,16 @@ print "NO_THRESHOLDS: ",label
 #クラスタごとにグラフを表示
 for i in range(label_max+1):
     df = pd.DataFrame(tmp[i], index=dates)
-    print ""
-    print df
+    print "--- Cluster"+str(i)+" ---"
+    print tmp[i].keys()
     df.plot(figsize=(10,8)) #グラフ描画
     plt.title('NO_THRESHOLDS: Cluster'+str(i))
     plt.show()
 
+print '----'*5
 PseudoF = p_f.main(tmp, label_max+1)
 print 'PseudoF: ',PseudoF
+print ''
 
 #--- K-means ---
 k = 8 #クラスタ数 
@@ -190,14 +194,24 @@ print "K-means: ",label
 #クラスタごとにグラフを表示
 for i in range(label_max+1):
     df = pd.DataFrame(tmp[i], index=dates)
-    print ""
-    print df
+    print "--- Cluster"+str(i)+" ---"
+    print tmp[i].keys()
     df.plot(figsize=(10,8)) #グラフ描画
     plt.title('K-means: Cluster'+str(i))
     plt.show()
-
+    
+print '----'*5
 PseudoF = p_f.main(tmp, label_max+1)
 print 'PseudoF: ',PseudoF
+print ''
 
 #--- 階層的クラスタリング---
-h_c.main(fname1, fname2, 'single')
+print 'Hierarchy Clustering'
+tmp = h_c.main(fname1, fname2, 'single')
+for i in range(len(tmp)):
+    print "--- Cluster"+str(i)+" ---"
+    print tmp[i].keys()
+
+print '----'*5
+PseudoF = p_f.main(tmp, len(tmp))
+print 'PseudoF: ',PseudoF
