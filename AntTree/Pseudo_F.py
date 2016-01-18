@@ -56,15 +56,16 @@ def PseudoF(G, T, Pg, n):
 def main(data, k):
     Pg = squares_inCluster(data, k)
     T,n = squares_All(data, k)
-    print 'Pg: ',Pg
-    print 'T: ',T
-    print 'n: ',n
-    print 'k: ',k
+    #print 'Pg: ',Pg
+    #print 'T: ',T
+    #print 'n: ',n
+    #print 'k: ',k
     P_F = PseudoF(k, T, Pg, n)
     #print P_F
     return P_F
 
 if __name__ == '__main__':
+    #テスト用
     a = np.array([1.0,2.0,3.0,4.0,5.0])
     b = np.array([0.0,9.0,8.0,7.0,6.0])
     c = np.array([5.0,5.0,5.0,5.0,5.0])

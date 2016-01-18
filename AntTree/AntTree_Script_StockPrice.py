@@ -33,7 +33,7 @@ import Pseudo_F as p_f
 #4/1 ~ 8/11 : 90日分
 #4/1 ~ 9/27 : 120日分
 start_date = datetime.date(2015,4,1)
-end_date = datetime.date(2015,5,18)
+end_date = datetime.date(2015,9,27)
 #企業コードと企業名
 companies_test = {9682:'DTS', 9742:'アイネス', 9613:'NTTデータ', 2327:'新日鉄住金ソリューションズ',
              9640:'セゾン情報システムズ', 3626:'ITホールディングス', 2317:'システナ',
@@ -76,12 +76,13 @@ companies_mix = {9437:'NTTドコモ', 4307:'野村総合研究所', 2327:'新日
 
     #↑printでの表示は工夫が必要... とりあえず使いたいのはkeyだけ
 
-companies = companies_food #クラスタリングする業種
+companies = companies_it #クラスタリングする業種
 #update →　ディクショナリの連結
 #companies.update(companies_food)
 #companies.update(companies_retail)
 #companies.update(companies_device)
 #companies.update(companies_service)
+print 'companies: ',len(companies)
             
 print 'term : '+str(start_date)+' -- '+str(end_date)
 #start_dateからend_dateまでの期間のリターンインデックスを計算，csvファイルで保存
