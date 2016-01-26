@@ -87,16 +87,16 @@ print 'companies: ',len(companies)
 print 'term : '+str(start_date)+' -- '+str(end_date)
 #start_dateからend_dateまでの期間のリターンインデックスを計算，csvファイルで保存
 #戻り値は営業日のdatetimeオブジェクト
-dates = r_index.main(start_date, end_date, companies)
-fname1 = 'return_index_values.csv'
-fname2 = 'return_index_codes.csv'
+#dates = r_index.main(start_date, end_date, companies)
+#fname1 = 'return_index_values.csv'
+#fname2 = 'return_index_codes.csv'
 
 #start_dateからend_dateまでのRSIを計算，csvファイルで保存
 #戻り値はdatetimeオブジェクト
-#n = 10 #10日間でのRSI
-#dates = rsi.main(start_date, end_date, n, companies)
-#fname1 = 'RSI_values.csv'
-#fname2 = 'RSI_codes.csv'
+n = 10 #10日間でのRSI
+dates = rsi.main(start_date, end_date, n, companies)
+fname1 = 'RSI_values.csv'
+fname2 = 'RSI_codes.csv'
 
 print 'dates : ', len(dates)
 
@@ -121,6 +121,8 @@ for i in label:
     
 print ""
 print "STOCH : ",label
+
+k = label_max+1 #k-meansのクラスタ数 
 
 #クラスタごとにグラフを表示
 for i in range(label_max+1):
@@ -172,8 +174,8 @@ print 'PseudoF: ',PseudoF
 print ''
 
 #--- K-means ---
-k = 8 #クラスタ数 
-label, X = kmeans_sp.main(fname1, k)
+
+label, X = kmeans_sp.main(fname1, k) #kはstochと同じに指定
 
 tmp = []
 label_max = max(label)

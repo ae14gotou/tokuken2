@@ -53,8 +53,8 @@ def main(fname1, fname2, m):
     Y = dendrogram(result, labels=t)
     #linkage,dendrogramの戻り値等はScipy.orgのサイト参照
     return_dic = set_label(Y, X, result, t)
-    #plt.title('Result dendrogram')
-    #plt.show()
+    plt.title('Result dendrogram')
+    plt.show()
 
     return return_dic
 
