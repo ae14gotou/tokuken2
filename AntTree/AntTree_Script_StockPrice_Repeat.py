@@ -80,7 +80,7 @@
 
         #↑printでの表示は工夫が必要... とりあえず使いたいのはkeyだけ
 
-    companies = companies_it #クラスタリングする業種
+    companies = companies_service #クラスタリングする業種
     #update →　ディクショナリの連結
     #companies.update(companies_food)
     #companies.update(companies_retail)
