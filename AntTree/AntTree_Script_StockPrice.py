@@ -129,8 +129,13 @@ for i in range(label_max+1):
     df = pd.DataFrame(tmp[i], index=dates)
     print "--- Cluster"+str(i)+" ---"
     print tmp[i].keys()
+    if fname1 == 'return_index_values.csv':
+        df = df*100
     df.plot(figsize=(10,8)) #グラフ描画
     plt.title('STOCH: Cluster'+str(i))
+    plt.xlabel('date')
+    if fname1 == 'return_index_values.csv':
+        plt.ylabel('changing rate [%]')
     plt.show()
 
 print '----'*5
@@ -164,8 +169,13 @@ for i in range(label_max+1):
     df = pd.DataFrame(tmp[i], index=dates)
     print "--- Cluster"+str(i)+" ---"
     print tmp[i].keys()
+    if fname1 == 'return_index_values.csv':
+        df = df*100
     df.plot(figsize=(10,8)) #グラフ描画
     plt.title('NO_THRESHOLDS: Cluster'+str(i))
+    plt.xlabel('date')
+    if fname1 == 'return_index_values.csv':
+        plt.ylabel('changing rate [%]')
     plt.show()
 
 print '----'*5
@@ -199,8 +209,13 @@ for i in range(label_max+1):
     df = pd.DataFrame(tmp[i], index=dates)
     print "--- Cluster"+str(i)+" ---"
     print tmp[i].keys()
+    if fname1 == 'return_index_values.csv':
+        df = df*100
     df.plot(figsize=(10,8)) #グラフ描画
     plt.title('K-means: Cluster'+str(i))
+    plt.xlabel('date')
+    if fname1 == 'return_index_values.csv':
+        plt.ylabel('changing rate [%]')
     plt.show()
     
 print '----'*5
